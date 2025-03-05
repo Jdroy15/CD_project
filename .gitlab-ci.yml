@@ -1,14 +1,44 @@
-# This file is a template, and might need editing before it works on your project.
-# Full project: https://gitlab.com/pages/plain-html
+stages:
+  - build
+  - static_analysis
+  - test
+  - quality_gate
+  - release
 
-image: busybox
+default:
+  image: registry.smile.fr/formation-devsecops-embedded-iot/runner:2.3
 
-pages:
-  stage: deploy
+build_job:
+  stage: build
   script:
-    - echo "The site will be deployed to $CI_PAGES_URL"
-  artifacts:
-    paths:
-      - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - echo "=== Building the project ==="
+    - # Add your build commands here
+    - echo "=== End of Build Job ==="
+
+static_analysis_job:
+  stage: static_analysis
+  script:
+    - echo "=== Running static analysis ==="
+    - # Add static analysis tools here
+    - echo "=== End of Static Analysis Job ==="
+
+test_job:
+  stage: test
+  script:
+    - echo "=== Running unit tests ==="
+    - # Add your unit testing commands here
+    - echo "=== End of Unit Testing Job ==="
+
+quality_gate_job:
+  stage: quality_gate
+  script:
+    - echo "=== Running SonarScanner ==="
+    - # Add SonarScanner configuration and commands here
+    - echo "=== End of SonarScanner Job ==="
+
+release_job:
+  stage: release
+  script:
+    - echo "=== Releasing the application ==="
+    - # Add your release commands here
+    - echo "=== End of Release Job ==="
